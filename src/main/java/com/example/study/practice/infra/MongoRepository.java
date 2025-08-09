@@ -16,4 +16,12 @@ public class MongoRepository<T> {
 		Query query = new Query().limit(100);
 		return mongoTemplate.find(query, entityClass);
 	}
+
+	public <T> List<T> find(Class<T> entityClass, Query query) {
+		return mongoTemplate.find(query, entityClass);
+	}
+
+	public <T> long count(Class<T> entityClass, Query query) {
+		return mongoTemplate.count(query, entityClass);
+	}
 }

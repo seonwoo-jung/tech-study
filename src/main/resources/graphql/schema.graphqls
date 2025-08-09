@@ -1,0 +1,60 @@
+scalar DateTime
+
+type Movie {
+  id: ID!
+  title: String!
+  year: Int
+  # 필요한 필드 더 추가
+}
+
+type User {
+  id: ID!
+  name: String
+  # ...
+}
+
+type Theater {
+  id: ID!
+  theaterId: Int
+  # ...
+}
+
+type Comment {
+  id: ID!
+  movieId: ID!
+  userId: ID!
+  text: String
+  user: User        # N+1 방지 대상(아래 DataLoader로 해결)
+  movie: Movie
+}
+
+type Session {
+  id: ID!
+  userId: ID!
+  startedAt: DateTime
+}
+
+"""
+공통 페이지네이션 응답 래퍼
+"""
+type PageInfo {
+  total: Int!
+  hasNext: Boolean!
+  limit: Int!
+  offset: Int!
+}
+
+type MoviePage {
+  items: [Movie!]!
+  pageInfo: PageInfo!
+}
+
+type Query {
+  # 기존 /movies/find-all 대응
+  movies(limit: Int = 100, offset: Int = 0, title: String, year: Int): MoviePage
+
+  users(limit: Int = 100, offset: Int = 0): [User!]!
+  theaters(limit: Int = 100, offset: Int = 0): [Theater!]!
+  comments(limit: Int = 100, offset: Int = 0, movieId: ID, userId: ID): [Comment!]!
+  sessions(limit: Int = 100, offset: Int = 0, userId: ID): [Session!]!
+}

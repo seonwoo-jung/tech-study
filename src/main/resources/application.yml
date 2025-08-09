@@ -1,4 +1,10 @@
 spring:
+  graphql:
+    graphiql:
+      enabled: true          # 브라우저에서 테스트 UI 사용
+      path: /graphiql
+    http:
+      path: /graphql
   data:
     mongodb:
       uri: ${MONGODB_URI}
