@@ -1,4 +1,4 @@
-package com.example.study.practice.config;
+package com.example.study.config;
 
 import com.example.study.practice.application.PracticeService;
 import com.example.study.practice.domain.Movies;

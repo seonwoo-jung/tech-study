@@ -1,10 +1,53 @@
 scalar DateTime
+scalar Date
 
 type Movie {
-  id: ID!
-  title: String!
-  year: Int
-  # 필요한 필드 더 추가
+    id: ID!
+    plot: String
+    genres: [String]
+    runtime: Int
+    cast: [String]
+    num_mflix_comments: Int
+    title: String!
+    fullplot: String
+    languages: [String]
+    poster: String
+    released: Date
+    directors: [String]
+    rated: String
+    awards: Awards
+    lastupdated: String
+    year: Int
+    imdb: String
+    countries: [String]
+    type: String
+    tomatoes: Tomatoes
+}
+
+type Tomatoes {
+    viewer: Viewer
+    fresh: Int
+    critic: Critic
+    rotten: Int
+    lastUpdated: Date
+}
+
+type Viewer {
+    rating: Float
+    numReviews: Int
+    meter: Int
+}
+
+type Critic {
+    rating: Float
+    numReviews: Int
+    meter: Int
+}
+
+type Awards {
+    wins: Int
+    nominations: Int
+    text: String
 }
 
 type User {
@@ -14,9 +57,26 @@ type User {
 }
 
 type Theater {
-  id: ID!
-  theaterId: Int
-  # ...
+    id: ID!
+    theaterId: Int
+    location: Location
+}
+
+type Location {
+    address: Address
+    geo: Geo
+}
+
+type Address {
+    street1: String
+    city: String
+    state: String
+    zipcode: String
+}
+
+type Geo {
+    type: String
+    coordinates: [String]
 }
 
 type Comment {
@@ -34,25 +94,8 @@ type Session {
   startedAt: DateTime
 }
 
-"""
-공통 페이지네이션 응답 래퍼
-"""
-type PageInfo {
-  total: Int!
-  hasNext: Boolean!
-  limit: Int!
-  offset: Int!
-}
-
-type MoviePage {
-  items: [Movie!]!
-  pageInfo: PageInfo!
-}
-
 type Query {
-  # 기존 /movies/find-all 대응
-  movies(limit: Int = 100, offset: Int = 0, title: String, year: Int): MoviePage
-
+  movies(title: String, year: Int): [Movie!]!
   users(limit: Int = 100, offset: Int = 0): [User!]!
   theaters(limit: Int = 100, offset: Int = 0): [Theater!]!
   comments(limit: Int = 100, offset: Int = 0, movieId: ID, userId: ID): [Comment!]!

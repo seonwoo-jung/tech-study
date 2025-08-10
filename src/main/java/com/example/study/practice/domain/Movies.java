@@ -1,6 +1,6 @@
 package com.example.study.practice.domain;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,20 +19,16 @@ public class Movies {
     private Integer runtime;
     private List<String> cast;
 	private Integer num_mflix_comments;
-
 	private String title;
 	private String fullplot;
 	private List<String> languages;
 	private String poster;
-
-	private Date released; // ?
-
+	private LocalDate released;
 	private List<String> directors;
 	private String rated;
 	private Awards awards;
 	private String lastupdated;
 	private String year;
-
 	private Imdb imdb;
 	private List<String> countries;
 	private String type;
@@ -61,7 +57,7 @@ public class Movies {
         private Integer fresh;
         private Critic critic;
         private Integer rotten;
-        private Date lastUpdated;
+        private LocalDate lastUpdated;
 
         @Getter
         @NoArgsConstructor

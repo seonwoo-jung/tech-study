@@ -7,7 +7,6 @@ import com.example.study.practice.domain.Sessions;
 import com.example.study.practice.domain.Theaters;
 import com.example.study.practice.domain.Users;
 import java.util.List;
-import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -22,10 +21,8 @@ public class PracticeGraphQLController {
 
 	private final PracticeService<?> practiceService;
 
-	@QueryMapping
-	public Map<String, Object> movies(
-			@Argument Integer limit,
-			@Argument Integer offset,
+	@QueryMapping(name = "movies")
+	public List<Movies> movies(
 			@Argument String title,
 			@Argument Integer year
 	) {
@@ -36,33 +33,25 @@ public class PracticeGraphQLController {
 		if (year != null) {
 			q.addCriteria(Criteria.where("year").is(year));
 		}
-		int l = limit != null ? limit : 100;
-		int o = offset != null ? offset : 0;
-		q.limit(l).skip(o);
+		q.limit(100).skip(0);
 
-		List<Movies> items = practiceService.find(Movies.class, q);
-		long total = practiceService.count(Movies.class,
-			q.skip(0).limit(0)); // count용으로 skip/limit 제거
-
-		return Map.of(
-			"items", items, "pageInfo", Map.of("total", total, "hasNext", total > o + items.size(), "limit", l, "offset", o)
-		);
+		return practiceService.find(Movies.class, q);
 	}
 
-	@QueryMapping
+	@QueryMapping(name = "users")
 	public List<Users> users(@Argument Integer limit, @Argument Integer offset) {
 		Query q = new Query().limit(limit == null ? 100 : limit).skip(offset == null ? 0 : offset);
 		return practiceService.find(Users.class, q);
 	}
 
-	@QueryMapping
+	@QueryMapping(name = "theaters")
 	public List<Theaters> theaters(@Argument Integer limit, @Argument Integer offset) {
 		Query q = new Query().limit(limit == null ? 100 : limit)
 			.skip(offset == null ? 0 : offset);
 		return practiceService.find(Theaters.class, q);
 	}
 
-	@QueryMapping
+	@QueryMapping(name = "comments")
 	public List<Comments> comments(
 			@Argument Integer limit,
 			@Argument Integer offset,
@@ -80,7 +69,7 @@ public class PracticeGraphQLController {
 		return practiceService.find(Comments.class, q);
 	}
 
-	@QueryMapping
+	@QueryMapping(name = "sessions")
 	public List<Sessions> sessions(
 			@Argument Integer limit,
 			@Argument Integer offset,
