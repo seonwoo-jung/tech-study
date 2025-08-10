@@ -1,6 +1,6 @@
 package com.example.study.practice.domain;
 
-import java.util.Date;
+import java.time.LocalDate;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -19,5 +19,5 @@ public class Comments {
 	@Field("movie_id") // JSON 필드명과 자바 필드명이 다를 경우
     private String movieId;
 	private String text;
-	private Date date;
+	private LocalDate date;
 }

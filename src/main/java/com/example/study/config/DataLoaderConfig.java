@@ -22,7 +22,7 @@ public class DataLoaderConfig {
     public static final String MOVIE_BY_ID = "MOVIE_BY_ID";
 
     @Bean
-    DataLoaderRegistry dataLoaderRegistry(PracticeService<?> practiceService) {
+    DataLoaderRegistry dataLoaderRegistry(PracticeService practiceService) {
         DataLoaderRegistry registry = new DataLoaderRegistry();
 
         // Users

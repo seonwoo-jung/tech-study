@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Getter
 @NoArgsConstructor
@@ -18,16 +19,19 @@ public class Movies {
     private List<String> genres;
     private Integer runtime;
     private List<String> cast;
-	private Integer num_mflix_comments;
+	@Field("num_mflix_comments")
+	private Integer numMflixComments;
 	private String title;
-	private String fullplot;
+	@Field("fullplot")
+	private String fullPlot;
 	private List<String> languages;
 	private String poster;
 	private LocalDate released;
 	private List<String> directors;
 	private String rated;
 	private Awards awards;
-	private String lastupdated;
+	@Field("lastupdated")
+	private String lastUpdated;
 	private String year;
 	private Imdb imdb;
 	private List<String> countries;

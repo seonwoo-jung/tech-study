@@ -7,16 +7,16 @@ type Movie {
     genres: [String]
     runtime: Int
     cast: [String]
-    num_mflix_comments: Int
+    numMflixComments: Int
     title: String!
-    fullplot: String
+    fullPlot: String
     languages: [String]
     poster: String
     released: Date
     directors: [String]
     rated: String
     awards: Awards
-    lastupdated: String
+    lastUpdated: String
     year: Int
     imdb: String
     countries: [String]
@@ -80,24 +80,24 @@ type Geo {
 }
 
 type Comment {
-  id: ID!
-  movieId: ID!
-  userId: ID!
-  text: String
-  user: User        # N+1 방지 대상(아래 DataLoader로 해결)
-  movie: Movie
+    id: ID
+    name: String
+    email: String
+    movieId: ID
+    text: String
+    date: Date
 }
 
 type Session {
-  id: ID!
-  userId: ID!
-  startedAt: DateTime
+  id: ID
+  userId: String
+  jwt: String
 }
 
 type Query {
-  movies(title: String, year: Int): [Movie!]!
-  users(limit: Int = 100, offset: Int = 0): [User!]!
-  theaters(limit: Int = 100, offset: Int = 0): [Theater!]!
-  comments(limit: Int = 100, offset: Int = 0, movieId: ID, userId: ID): [Comment!]!
-  sessions(limit: Int = 100, offset: Int = 0, userId: ID): [Session!]!
+    movies(title: String, year: Int): [Movie!]!
+    theaters(limit: Int = 100, offset: Int = 0): [Theater!]!
+    users(limit: Int = 100, offset: Int = 0): [User!]!
+    comments(limit: Int = 100, offset: Int = 0, name: String): [Comment!]!
+    sessions(limit: Int = 100, offset: Int = 0, userId: String): [Session!]!
 }

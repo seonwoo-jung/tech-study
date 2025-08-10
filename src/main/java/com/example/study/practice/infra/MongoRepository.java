@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class MongoRepository<T> {
+public class MongoRepository {
 
 	private final MongoTemplate mongoTemplate;
 

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class PracticeService<T> {
+public class PracticeService {
 
 	private final MongoRepository mongoRepository;
 

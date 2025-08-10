@@ -28,17 +28,17 @@ public class PracticeController {
 	}
 
 	@GetMapping("/theaters/find-all")
-	public List<Users> findAllTheaters() {
+	public List<Theaters> findAllTheaters() {
 		return practiceService.findAll(Theaters.class);
 	}
 
 	@GetMapping("/comments/find-all")
-	public List<Users> findAllComments() {
+	public List<Comments> findAllComments() {
 		return practiceService.findAll(Comments.class);
 	}
 
 	@GetMapping("/sessions/find-all")
-	public List<Users> findAllSessions() {
+	public List<Sessions> findAllSessions() {
 		return practiceService.findAll(Sessions.class);
 	}
 }
